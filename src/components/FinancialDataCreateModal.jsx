@@ -127,7 +127,6 @@ const FinancialDataCreateModal = () => {
           justifyContent:'center'
         }}>
           <Button
-
             type="submit"
             colorScheme='blue'
           >

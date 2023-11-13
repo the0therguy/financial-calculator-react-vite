@@ -19,6 +19,7 @@ import Header from "../../components/Header.jsx";
 import { useEffect, useState} from "react";
 import FinancialDataCreateModal from "../../components/FinancialDataCreateModal.jsx";
 import BarChartComponent from "../../components/BarChartComponent.jsx";
+import {DeleteIcon} from '@chakra-ui/icons'
 
 const HomePage = () => {
   const [financialData, setFinancialData] = useState([])
@@ -151,7 +152,7 @@ const HomePage = () => {
       <p>Selected Year: {selectedYear}</p>
       <Box>
         <TableContainer>
-          <Table variant='striped'>
+          <Table variant='striped' size="sm">
             <TableCaption>Your Financial Data</TableCaption>
             <Thead>
               <Tr>
@@ -164,26 +165,31 @@ const HomePage = () => {
                 <Th>Expenses</Th>
                 <Th>Financial Health Score</Th>
                 <Th>Financial Health Condition</Th>
+                <Th>Action</Th>
               </Tr>
             </Thead>
             <Tbody>
+              <Tr>
+                <Td>1</Td>
+                <Td>Unga Bunga</Td>
+                <Td>January</Td>
+              </Tr>
               { financialData?  (
                 financialData.map((item, index) => {
-                  // <Tr key={index}>
-                  //   <Td>{index}</Td>
-                  //   <Td>{item.business_name}</Td>
-                  //   <Td>{item.month_name}</Td>
-                  //   <Td>{item.monthly_income}</Td>
-                  //   <Td>{item.assets}</Td>
-                  //   <Td>{item.debts}</Td>
-                  //   <Td>{item.expenses}</Td>
-                  //   <Td>{item.financial_health_score}</Td>
-                  //   <Td>{item.financial_health_description}</Td>
-                  // </Tr>
-                  // console.log(index)
-                  <Tr key={index}>
-
+                  <Tr>
+                    <Td>{index}</Td>
+                    <Td>{item?.business_name}</Td>
+                    <Td>{item?.month_name}</Td>
+                    <Td>{item?.monthly_income}</Td>
+                    <Td>{item?.assets}</Td>
+                    <Td>{item?.debts}</Td>
+                    <Td>{item?.expenses}</Td>
+                    <Td>{item?.financial_health_score}</Td>
+                    <Td>{item?.financial_health_description}</Td>
+                    <Td><DeleteIcon /></Td>
                   </Tr>
+                  // console.log(index)
+
                 })
               ) : (
                 <Tr>
