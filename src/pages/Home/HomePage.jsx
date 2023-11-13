@@ -13,20 +13,21 @@ import {
   Th,
   Td,
   TableCaption,
-  TableContainer, Box, Flex, Heading, Select, useToast, Button, useDisclosure
+  TableContainer, Box, Heading, Select, useToast, Button, useDisclosure, AlertIcon, Alert
 } from "@chakra-ui/react";
 import Header from "../../components/Header.jsx";
-import { useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import FinancialDataCreateModal from "../../components/FinancialDataCreateModal.jsx";
 import BarChartComponent from "../../components/BarChartComponent.jsx";
 import {DeleteIcon} from '@chakra-ui/icons'
+import AuthContext from "../../context/AuthContext.jsx";
 
 const HomePage = () => {
   const [financialData, setFinancialData] = useState([])
   const { isOpen, onOpen, onClose } = useDisclosure()
   let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
   const toast = useToast()
-  const [financialModal, setFinancialModal] = useState(false)
+  const { user } = useContext(AuthContext);
 
   const years = [];
   const currentYear = new Date().getFullYear();
@@ -44,7 +45,7 @@ const HomePage = () => {
     if (!selectedYear)
     {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/financial-datas/?year=${currentYear}`,{
+        const response = await fetch(`${import.meta.env["VITE_REACT_API_URL"]}/api/v1/financial-datas/?year=${currentYear}`,{
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -81,7 +82,7 @@ const HomePage = () => {
     else
     {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/financial-datas/?year=${selectedYear}`,{
+        const response = await fetch(`${import.meta.env["VITE_REACT_API_URL"]}/api/v1/financial-datas/?year=${selectedYear}`,{
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -119,11 +120,18 @@ const HomePage = () => {
   }, [selectedYear])
 
   console.log(financialData)
+  console.log()
 
 
   return (
     <>
       <Header/>
+      <Alert status='warning'>
+        <AlertIcon />
+        This site's is backend is hosted on free render server. Whaterever you add it will be vanished after 30mins. Thank you.
+      </Alert>
+      <p>Hello {user.username}</p>
+
       <Button onClick={onOpen} >Add data</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

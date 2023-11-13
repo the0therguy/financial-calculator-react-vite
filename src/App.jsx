@@ -5,6 +5,7 @@ import LoginPage from "./pages/Login/LoginPage.jsx";
 import SignUpPage from "./pages/SignUp/SignUpPage.jsx";
 import {AuthProvider} from './context/AuthContext'
 import PrivateRoute from "./utils/PrivateRoute.jsx";
+import ChangePassword from "./pages/Home/ChangePassword.jsx";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route element={<PrivateRoute/>}>
               <Route element={<HomePage/>} path="/"/>
+              <Route element={<ChangePassword />} path="/change-password" />
             </Route>
             <Route element={<LoginPage/>} path="/login"/>
             <Route element={<SignUpPage/>} path="/signup"/>

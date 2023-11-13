@@ -1,29 +1,32 @@
-import React, {useContext} from 'react'
-import { Link } from 'react-router-dom'
-import AuthContext from '../context/AuthContext'
-import {Button} from "@chakra-ui/react";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import {Box, Button, Flex, Spacer, Text} from '@chakra-ui/react';
+import AuthContext from '../context/AuthContext';
 
 const Header = () => {
-  let {user, logoutUser} = useContext(AuthContext)
+  const { user, logoutUser } = useContext(AuthContext);
+
   return (
-    <div>
-      <Link to="/" >Home</Link>
-      <span> | </span>
-      {user ? (
-        <p>
-          <Button onClick={logoutUser}>
-            Logout
-          </Button>
-        </p>
-      ): (
-        <Link to="/login" >Login</Link>
-      )}
+    <Flex align="center" justify="space-between">
+      <Flex >
+        <Link to="/">Home</Link>
+        <Text mx="10"> | </Text>
+        <Link to="/change-password">Change Password</Link>
 
-      {user &&   <p>Hello {user.username}
-      </p>}
+      </Flex>
 
-    </div>
-  )
-}
+      <Flex align="">
+        <Text mx="10"> | </Text>
+        {user ? (
+          <React.Fragment>
+            <Button onClick={logoutUser}>Logout</Button>
+          </React.Fragment>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
+      </Flex>
+    </Flex>
+  );
+};
 
-export default Header
+export default Header;

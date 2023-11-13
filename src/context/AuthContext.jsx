@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
 
   let loginUser = async (e)=> {
     e.preventDefault()
-    let response = await fetch('http://127.0.0.1:8000/api/v1/signin/', {
+    let response = await fetch(`${import.meta.env["VITE_REACT_API_URL"]}/api/v1/signin/`, {
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -37,7 +37,7 @@ export const AuthProvider = ({children}) => {
 
 
   let logoutUser = async () => {
-    let response = await fetch('http://127.0.0.1:8000/api/v1/logout/',{
+    let response = await fetch(`${import.meta.env["VITE_REACT_API_URL"]}/api/v1/logout/`,{
       method: "POST",
       headers:{
         'Content-Type':'application/json',
@@ -54,7 +54,7 @@ export const AuthProvider = ({children}) => {
 
   let updateToken = async ()=> {
 
-    let response = await fetch('http://127.0.0.1:8000/api/v1/token/refresh/', {
+    let response = await fetch(`${import.meta.env["VITE_REACT_API_URL"]}/api/v1/token/refresh/`, {
       method:'POST',
       headers:{
         'Content-Type':'application/json',

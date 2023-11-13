@@ -1,4 +1,4 @@
-import {Box, Button, chakra, FormLabel, Input} from "@chakra-ui/react";
+import {Alert, AlertIcon, Box, Button, chakra, FormLabel, Input} from "@chakra-ui/react";
 import {useContext} from "react";
 import AuthContext from "../../context/AuthContext";
 
@@ -7,6 +7,10 @@ const LoginPage = () => {
 
   return (
     <>
+      <Alert status='warning'>
+        <AlertIcon />
+        This site's is backend is hosted on free render server. Whaterever you add it will be vanished after 30mins. Thank you.
+      </Alert>
       <Box>
         <chakra.form onSubmit={loginUser}>
           <FormLabel>Username</FormLabel>

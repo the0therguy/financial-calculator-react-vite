@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Box, FormControl, FormLabel, Input, chakra, Button, useToast} from "@chakra-ui/react";
+import {Box, FormControl, FormLabel, Input, chakra, Button, useToast, AlertIcon, Alert} from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
 
 const SignUpPage = () => {
@@ -21,7 +21,7 @@ const SignUpPage = () => {
         setMessage("Both password didn't match")
         return null
       }
-      const response = await fetch('http://127.0.0.1:8000/api/v1/signup/', {
+      const response = await fetch(`${import.meta.env["VITE_REACT_API_URL"]}/api/v1/signup/`, {
         method: "POST",
         headers:{
           'Content-Type':'application/json'
@@ -79,6 +79,10 @@ const SignUpPage = () => {
   }
   return (
     <>
+      <Alert status='warning'>
+        <AlertIcon />
+        This site's is backend is hosted on free render server. Whaterever you add it will be vanished after 30mins. Thank you.
+      </Alert>
       <Box>
         {
           message ? <p>{message}</p> : null
