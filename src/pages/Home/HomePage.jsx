@@ -13,7 +13,7 @@ import {
   Th,
   Td,
   TableCaption,
-  TableContainer, Box, Heading, Select, useToast, Button, useDisclosure, AlertIcon, Alert
+  TableContainer, Box, Heading, Select, useToast, Button, useDisclosure, AlertIcon, Alert, CloseButton
 } from "@chakra-ui/react";
 import Header from "../../components/Header.jsx";
 import {useContext, useEffect, useState} from "react";
@@ -21,6 +21,7 @@ import FinancialDataCreateModal from "../../components/FinancialDataCreateModal.
 import BarChartComponent from "../../components/BarChartComponent.jsx";
 import {DeleteIcon} from '@chakra-ui/icons'
 import AuthContext from "../../context/AuthContext.jsx";
+import RatioBarChart from "../../components/RatioBarChart.jsx";
 
 const HomePage = () => {
   const [financialData, setFinancialData] = useState([])
@@ -32,6 +33,11 @@ const HomePage = () => {
   const years = [];
   const currentYear = new Date().getFullYear();
   const [selectedYear, setSelectedYear] = useState("");
+  const {
+    isOpen: isVisible,
+    onAlertClose,
+    onAlertOpen,
+  } = useDisclosure({ defaultIsOpen: true })
 
   for (let year = currentYear; year >= currentYear - 50; year--) {
     years.push(year);
@@ -130,6 +136,7 @@ const HomePage = () => {
         <AlertIcon />
         This site's is backend is hosted on free render server. Whaterever you add it will be vanished after 30mins. Thank you.
       </Alert>
+      <br/>
       <p>Hello {user.username}</p>
 
       <Button onClick={onOpen} >Add data</Button>
@@ -213,6 +220,8 @@ const HomePage = () => {
             <>
               <Heading as='h3' size='lg'>Your Analytics</Heading>
               <BarChartComponent data={financialData} />
+              <br/>
+              <RatioBarChart data={financialData} />
             </>
 
           ) : null
