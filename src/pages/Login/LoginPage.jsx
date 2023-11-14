@@ -1,6 +1,7 @@
 import {Alert, AlertIcon, Box, Button, chakra, FormLabel, Input} from "@chakra-ui/react";
 import {useContext} from "react";
 import AuthContext from "../../context/AuthContext";
+import {Link} from "react-router-dom";
 
 const LoginPage = () => {
   let {loginUser} = useContext(AuthContext)
@@ -21,7 +22,7 @@ const LoginPage = () => {
           <Button type='submit' w='100%' my={5} variant='outline'>
             Login
           </Button>
-          <p>If your new please <Button colorScheme='blue'><a href='/signup'>Sign up</a></Button></p>
+          <p>If your new please <Button colorScheme='blue'><Link to='/signup'>Sign up</Link></Button></p>
         </chakra.form>
       </Box>
 
